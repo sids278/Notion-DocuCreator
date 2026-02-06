@@ -1,0 +1,140 @@
+{
+  "name": "vscode-notion-docs",
+  "displayName": "Notion Documentation Sync",
+  "description": "Sync your code documentation to Notion",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onStartupFinished",
+    "onCommand:notion-sync.authenticate",
+    "onCommand:notion-sync.syncToNotion",
+    "onCommand:confluence-sync.authenticate",
+    "onCommand:confluence-sync.syncToConfluence",
+    "onCommand:docs-sync.syncToBoth"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "notion-sync.authenticate",
+        "title": "Notion: Authenticate"
+      },
+      {
+        "command": "notion-sync.syncToNotion",
+        "title": "Notion: Sync Current File"
+      },
+      {
+        "command": "notion-sync.syncProject",
+        "title": "Notion: Sync Entire Project"
+      },
+      {
+        "command": "confluence-sync.authenticate",
+        "title": "Confluence: Authenticate"
+      },
+      {
+        "command": "confluence-sync.syncToConfluence",
+        "title": "Confluence: Sync Current File"
+      },
+      {
+        "command": "confluence-sync.syncProject",
+        "title": "Confluence: Sync Entire Project"
+      },
+      {
+        "command": "docs-sync.syncToBoth",
+        "title": "Docs: Sync to Both Notion & Confluence"
+      },
+      {
+        "command": "docs-sync.showConfig",
+        "title": "Docs: Show Config"
+      },
+      {
+        "command": "docs-sync.setDatabaseFromEnv",
+        "title": "Docs: Set Notion Database From .env"
+      },
+      {
+        "command": "docs-sync.clearConfig",
+        "title": "Docs: Clear Saved Config"
+      },
+      {
+        "command": "docs-sync.chooseDestination",
+        "title": "Docs: Choose Sync Destination"
+      }
+    ],
+    "configuration": {
+      "title": "Notion Documentation Sync",
+      "properties": {
+        "notionSync.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Notion Integration Token"
+        },
+        "notionSync.databaseId": {
+          "type": "string",
+          "default": "",
+          "description": "Notion Database ID for documentation"
+        },
+        "confluenceSync.baseUrl": {
+          "type": "string",
+          "default": "",
+          "description": "Confluence base URL (e.g., https://your-domain.atlassian.net)"
+        },
+        "confluenceSync.username": {
+          "type": "string",
+          "default": "",
+          "description": "Confluence username/email"
+        },
+        "confluenceSync.apiToken": {
+          "type": "string",
+          "default": "",
+          "description": "Confluence API token"
+        },
+        "confluenceSync.spaceKey": {
+          "type": "string",
+          "default": "",
+          "description": "Confluence space key"
+        },
+        "confluenceSync.parentPageId": {
+          "type": "string",
+          "default": "",
+          "description": "Parent page ID for documentation (optional)"
+        },
+        "docsSync.defaultDestination": {
+          "type": "string",
+          "enum": [
+            "notion",
+            "confluence",
+            "both"
+          ],
+          "default": "both",
+          "description": "Default sync destination"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "eslint": "^8.0.0",
+    "typescript": "^5.0.0"
+  },
+  "dependencies": {
+    "@notionhq/client": "^2.2.14",
+    "axios": "^1.6.0",
+    "dotenv": "^17.2.4"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "notionSync.databaseId": "2ffff72a55d580ffbd06ffcae89c7866",
+  "confluence.baseUrl": "https://your-domain.atlassian.net",
+  "confluence.username": "user@example.com",
+  "confluence.spaceKey": "DOCS"
+}
